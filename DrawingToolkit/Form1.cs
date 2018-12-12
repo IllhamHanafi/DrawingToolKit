@@ -15,7 +15,7 @@ namespace DrawingToolkit
         public Form1()
         {
             this.MouseMove += new MouseEventHandler(this.myMouseMoveHandler);
-            this.MouseDown += new MouseEventHandler(this.myMouseDownHandler);
+            this.MouseDown += new MouseEventHandler(this.myMouseDownHandler); 
             this.MouseUp += new MouseEventHandler(this.myMouseUpHandler);
             InitializeComponent();
             g = panel1.CreateGraphics();
@@ -24,9 +24,12 @@ namespace DrawingToolkit
         }
         Graphics g;
         Point a, b;
+        Point[] cubeTop = new Point[4];
+        Point[] cubeRight = new Point[4];
         Line line = new Line();
         bool lineToggle = false;
         bool circleToggle = false;
+        bool cubeToggle = false;
         bool shouldDraw = false;
         public Pen myPen = new Pen(Color.Black, 2);
         class DrawingCanvas : Control
@@ -63,6 +66,10 @@ namespace DrawingToolkit
                 {
                     g.DrawEllipse(myPen, a.X, a.Y, Math.Abs(a.X - b.X), Math.Abs(a.Y - b.Y));
                 }
+                else if (cubeToggle == true)
+                {
+                    g.DrawRectangle(myPen, a.X, a.Y, Math.Abs(a.X - b.X), Math.Abs(a.Y - b.Y));
+                }
                 this.Refresh();
 
             }
@@ -80,6 +87,24 @@ namespace DrawingToolkit
                 {
                     g.DrawEllipse(myPen, a.X, a.Y, Math.Abs(a.X - b.X), Math.Abs(a.Y - b.Y));
                 }
+                else if (cubeToggle == true)
+                {
+                    g.DrawRectangle(myPen, a.X, a.Y, Math.Abs(a.X - b.X), Math.Abs(a.Y - b.Y));
+                    Point c1 = new Point { X = (a.X + (Math.Abs(a.X - b.X) / 2)), Y = (a.Y - (Math.Abs(a.Y - b.Y) / 2)) };
+                    Point c2 = new Point { X = (b.X + (Math.Abs(a.X - b.X) / 2)), Y = (a.Y - (Math.Abs(a.Y - b.Y) / 2)) };
+                    Point c3 = new Point { X = (b.X + (Math.Abs(a.X - b.X) / 2)), Y = (b.Y - (Math.Abs(a.Y - b.Y) / 2)) };
+                    Point c4 = new Point { X = b.X, Y = a.Y };
+                    cubeTop[0] = a;
+                    cubeTop[1] = c1;
+                    cubeTop[2] = c2;
+                    cubeTop[3] = c4;
+                    cubeRight[0] = c4;
+                    cubeRight[1] = c2;
+                    cubeRight[2] = c3;
+                    cubeRight[3] = b;
+                    g.DrawPolygon(myPen, cubeTop);
+                    g.DrawPolygon(myPen, cubeRight);
+                }
             }
         }
 
@@ -93,12 +118,21 @@ namespace DrawingToolkit
         {
             circleToggle = true;
             lineToggle = false;
+            cubeToggle = false;
         }
 
         private void toolStripButton2_Click(object sender, EventArgs e)
         {
             lineToggle = true;
             circleToggle = false;
+            cubeToggle = false;
+        }
+
+        private void toolStripButton3_Click(object sender, EventArgs e)
+        {
+            lineToggle = false;
+            circleToggle = false;
+            cubeToggle = true;
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
