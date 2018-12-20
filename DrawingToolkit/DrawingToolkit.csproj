@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{04A76229-BD3F-4F3F-8356-80F44591743A}</ProjectGuid>
+    <ProjectGuid>{15655708-0E25-4AA1-92B7-B26FE1BB31EC}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>DrawingToolkit</RootNamespace>
     <AssemblyName>DrawingToolkit</AssemblyName>
@@ -46,15 +46,48 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Interface\AObject.cs" />
+    <Compile Include="Interface\ATool.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Interface\ADrawingState.cs" />
+    <Compile Include="Interface\IObserver.cs" />
+    <Compile Include="Interface\Observerable.cs" />
+    <Compile Include="Object\Circle.cs" />
+    <Compile Include="Object\Connector.cs" />
+    <Compile Include="Object\GroupObject.cs" />
+    <Compile Include="Object\Cube.cs" />
+    <Compile Include="Object\Rectangle.cs" />
+    <Compile Include="Object\Line.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="State\EditState.cs" />
+    <Compile Include="State\PreviewState.cs" />
+    <Compile Include="State\StaticState.cs" />
+    <Compile Include="Tool\CircleTool.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Tool\ConnectorTool.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Tool\CubeTool.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Tool\LineTool.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Tool\RectangleTool.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Tool\SelectTool.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -68,6 +101,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="ClassDiagram1.cd" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -82,10 +116,22 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\circle.bmp" />
+    <None Include="Resources\Editing-Line-icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\line.bmp" />
+    <None Include="Resources\circle-icon-png-3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\rectangle-png-3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\connector.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\square.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cube.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

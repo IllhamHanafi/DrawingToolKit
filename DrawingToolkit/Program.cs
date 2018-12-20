@@ -6,10 +6,6 @@ using System.Windows.Forms;
 
 namespace DrawingToolkit
 {
-    static class Tool
-    {
-
-    }
 
     static class Program
     {

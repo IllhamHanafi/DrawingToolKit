@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DrawingToolkit
+namespace DrawingToolkit.Interface
 {
-    public abstract class DrawingObject
+    public interface IObserver//yang mengamati
     {
-
+        void Update(Observerable observable);
     }
 }
